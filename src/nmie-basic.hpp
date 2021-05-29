@@ -734,9 +734,9 @@ namespace nmie {
       }
       if (n == 0) {a0 = cabs(an_[0]); b0 = cabs(bn_[0]);}
       if (n == nmax_ - 1 && nmax_preset_ <= 0) {
-        std::cout << "Failed to converge in Mie series for nmax="<<nmax_ << std::endl;
-        std::cout << "convergence threshold: "<< convergence_threshold_ << std::endl;
-        std::cout << "Mie series a[nmax]/a[1]:" << cabs(an_[n]) / a0 << " and b[nmax]/b[1]:" << cabs(bn_[n]) / b0 << std::endl;
+        std::cerr << "Failed to converge in Mie series for nmax="<<nmax_ << std::endl;
+        std::cerr << "convergence threshold: "<< convergence_threshold_ << std::endl;
+        std::cerr << "Mie series a[nmax]/a[1]:" << cabs(an_[n]) / a0 << " and b[nmax]/b[1]:" << cabs(bn_[n]) / b0 << std::endl;
 
       }
       if (cabs(an_[n]) / a0 < convergence_threshold_ &&
@@ -748,7 +748,7 @@ namespace nmie {
       if (nmm::isnan(an_[n].real()) || nmm::isnan(an_[n].imag()) ||
           nmm::isnan(bn_[n].real()) || nmm::isnan(bn_[n].imag())
           ) {
-        std::cout << "nmax value was changed due to unexpected error!!! New values is "<< n
+        std::cerr << "nmax value was changed due to unexpected error!!! New values is "<< n
                   << " (was "<<nmax_<<")"<<std::endl;
         nmax_ = n;
         break;

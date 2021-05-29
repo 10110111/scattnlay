@@ -58,10 +58,10 @@ namespace nmie {
       for (int n = nmax_local; n > 0; n--) {
         D1_failed[n - 1] = FloatType(n)*zinv - 1.0/(D1_failed[n] + FloatType(n)*zinv);
       }
-      printf("Faild D1[0] from reccurence (z = %16.14f, nmax = %d): %g\n",
+      fprintf(stderr, "Faild D1[0] from reccurence (z = %16.14f, nmax = %d): %g\n",
              faild_x, nmax_local, D1_failed[0].real());
     }
-    printf("Faild D1[0] from continued fraction (z = %16.14f): %g\n", faild_x,
+    fprintf(stderr, "Faild D1[0] from continued fraction (z = %16.14f): %g\n", faild_x,
            calcD1confra(0,z).real());
     //D1[nmax_] = calcD1confra(nmax_, z);
 
@@ -230,7 +230,7 @@ namespace nmie {
       spectra.push_back(std::vector<FloatType>({wavelength_, this->GetQext(),
 	      this->GetQsca(), this->GetQabs(), this->GetQbk()}));
     }  // end of for each WL in spectra
-    printf("Spectrum has %li fails\n",fails);
+    fprintf(stderr, "Spectrum has %li fails\n",fails);
     wavelength_ = wavelength_backup;
     return spectra;
   }
@@ -344,7 +344,7 @@ c    MM + 1  and - 1, alternately
     //10 CONTINUE
     do {      ++KOUNT;
       if (KOUNT > MAXIT) {
-        printf("re(%g):im(%g)\t\n", CONFRA.real(), CONFRA.imag());
+        fprintf(stderr, "re(%g):im(%g)\t\n", CONFRA.real(), CONFRA.imag());
         throw std::invalid_argument("ConFra--Iteration failed to converge!\n");
       }
       MM *= - 1;      KK += 2;  //debug  mm=1 kk=5

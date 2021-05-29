@@ -164,7 +164,7 @@ int main(int argc, char *argv[]) {
       throw std::invalid_argument(std::string("Empty structure!\n") + error_msg);
 
     if (nt < 0) {
-      printf("Error reading Theta.\n");
+      fprintf(stderr, "Error reading Theta.\n");
       return -1;
     } else if (nt == 1) {
       Theta[0] = ti*PI/180.0;

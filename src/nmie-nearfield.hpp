@@ -173,13 +173,13 @@ namespace nmie {
     for (int n = 0; n < nmax_; ++n) {
       if (cabs(aln_[0][n]) > 1e-10 && print_count < 2)  {
         print_count++;
-        std::cout<< std::setprecision(print_precision)
+        std::cerr<< std::setprecision(print_precision)
                  << "Warning: Potentially unstable calculation of aln[0]["
                  << n << "] = "<< aln_[0][n] <<std::endl;
       }
       if (cabs(bln_[0][n]) > 1e-10  && print_count < 2)  {
         print_count++;
-        std::cout<< std::setprecision(print_precision)
+        std::cerr<< std::setprecision(print_precision)
                  << "Warning: Potentially unstable calculation of bln[0]["
                  << n << "] = "<< bln_[0][n] <<std::endl;
       }
@@ -301,7 +301,7 @@ namespace nmie {
         Hdiff_ft = ConvertComplex<FloatType>(Hdiff);
         if ( nmm::isnan(Ediff_ft.real()) || nmm::isnan(Ediff_ft.imag()) ||
             nmm::isnan(Hdiff_ft.real()) || nmm::isnan(Hdiff_ft.imag()) ) {
-          std::cout << "Unexpected truncation during near-field evaluation at n = "<< n
+          std::cerr << "Unexpected truncation during near-field evaluation at n = "<< n
                     << " (of total nmax = "<<nmax<<")!!!"<<std::endl;
           break;
         }
@@ -316,7 +316,7 @@ namespace nmie {
         if (isConvergedE[i]) Ediff = c_zero;
         if (isConvergedH[i]) Hdiff = c_zero;
         if ((!isConvergedH[i] || !isConvergedE[i]) && n==nmax-1 && GetFieldConvergence()) {
-          std::cout<<"Econv:"<<cabs(Ediff)/cabs(E[i])<<" Hconv:"<<cabs(Hdiff)/cabs(H[i])<<std::endl;
+          std::cerr<<"Econv:"<<cabs(Ediff)/cabs(E[i])<<" Hconv:"<<cabs(Hdiff)/cabs(H[i])<<std::endl;
 
         }
         if (mode_n_ == Modes::kAll) {
@@ -352,8 +352,8 @@ namespace nmie {
     }  // end of for all n
     if( (!isConvergedE[0] || !isConvergedE[1] ||!isConvergedE[2] ||
         !isConvergedH[0] || !isConvergedH[1] ||!isConvergedH[2] ) && GetFieldConvergence()) {
-      std::cout << "Field evaluation failed to converge an nmax = "<< nmax << std::endl;
-      std::cout << "Near-field convergence threshold: "<<nearfield_convergence_threshold_<<std::endl;
+      std::cerr << "Field evaluation failed to converge an nmax = "<< nmax << std::endl;
+      std::cerr << "Near-field convergence threshold: "<<nearfield_convergence_threshold_<<std::endl;
       if (isMarkUnconverged) {  //mark as NaN
         for(auto &ee :E) ee /= c_zero;
         for(auto &ee :H) ee /= c_zero;
